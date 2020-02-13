@@ -11,7 +11,7 @@ const url = 'https://api.ipify.org?format=json';
  */
 const fetchMyIP = function(callback) { 
   // use request to fetch IP address from JSON API
-  request(url, (error, response, body) {
+  request(url, (error, response, body) => {
     if (error) callback(error);
     if (body) {
       console.log(`Your IP address is ${body}`);
