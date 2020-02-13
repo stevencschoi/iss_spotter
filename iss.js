@@ -14,7 +14,8 @@ const fetchMyIP = function(callback) {
   request(url, (error, response, body) => {
     if (error) callback(error);
     if (body) {
-      console.log(`Your IP address is ${body}`);
+      const data = JSON.parse(body);
+      callback(error, data.ip);
     }
   });
 }
