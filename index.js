@@ -16,7 +16,15 @@ fetchCoordsByIP('66.207.199.230', (error, data) => {
     console.log("It didn't work!" ,error);
   }
 
-  console.log(`It worked! Returned co-ordinates: ${JSON.stringify(data)}`);
+  console.log(`It worked! Returned co-ordinates: ${data.latitude}, ${data.longitude}`);
 });
 
-fetchISSFlyOverTimes();
+const myCoords = { latitude: '43.63830', longitude: '-79.43010' };
+
+fetchISSFlyOverTimes(myCoords, (error, passTimes) => {
+  if (error) {
+    console.log("It didn't work!" , error);
+  }
+
+  console.log('It worked! Returned flyover times:' , passTimes);
+});
