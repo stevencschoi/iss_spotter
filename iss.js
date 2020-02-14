@@ -23,7 +23,30 @@ const fetchMyIP = function(callback) {
 };
 
 const fetchCoordsByIP = (ip, callback) => {
+  request(`https://ipvigilante.com/json/${ip}`, (error, response, body) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+    // if non-200 status, assume server error
+    if (response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
+      callback(Error(msg), null);
+      return;
+    }
 
+    const { latitude, longitude } = JSON.parse(body).data;
+
+    callback(null, { latitude, longitude });
+
+    // if (body) {
+    //   const geoData = JSON.parse(body);
+    //   const latitude = geoData.latitude;
+    //   const longitude = geoData.longitude;
+    //   const coordinates = { latitude, longitude }
+    //   callback(error, coordinates);
+    // }
+  });
 };
 
 module.exports = {
